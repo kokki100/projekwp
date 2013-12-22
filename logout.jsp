@@ -1,8 +1,17 @@
 <%
 	session.invalidate();
-	Cookie cookie = new Cookie("name", null);
-    cookie.setMaxAge(0);
-	response.addCookie(cookie);
+	Integer onlineMember = (Integer) application.getAttribute("onlineMember");
+	onlineMember--;
+	application.setAttribute("onlineMember", onlineMember);
+
+	Cookie[] cookies = request.getCookies();
+	if (cookies!=null) {
+		int len = cookies.length;
+		for (int i = 0; i < len; i++) {
+			cookies[i].setMaxAge(0);
+			response.addCookie(cookies[i]);
+		}
+	}
 	
 	response.sendRedirect("home.jsp");
 %>

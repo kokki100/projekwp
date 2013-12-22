@@ -1,23 +1,38 @@
-<%@include file='template/templateStart.jsp'%>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ page language="java" import="java.util.*"%>
+<t:templateHead>
+	<jsp:attribute name="pageTitle">Bluelight Online Shop</jsp:attribute>
+	<jsp:attribute name="header"></jsp:attribute>
+	<jsp:attribute name="content"></jsp:attribute>
+</t:templateHead>
+
 <div style="width: 100%;">
 
 <%
-String err;
-String name=null;
+String userId = "", username = "";
+String firstName = "", middleName = "", lastName = "", email = "", phone = "", address = "", loginTime = "";
 Cookie[] cookies = request.getCookies();
-err = request.getParameter("err");
 
-if (cookies!=null) {
-	for (int i=0; i<cookies.length;i++) {
-		if(cookies[i].getName().equals("name"))
-			name=cookies[i].getValue();
-	}
-}
-
-if (name!=null) session.setAttribute("name",name);
-
-if (session.getAttribute("name") == null && false)
+if (session.getAttribute("UserID") == null)
 {
+	// not logged in
+	String err;
+	err = request.getParameter("err");
+
+	if (err == null || err.equals("")) {
+		err = "";
+	}
+	else {
+		if (err.equals("nousername")) {
+			err = "Username must be filled";
+		}
+		else if (err.equals("nopassword")) {
+			err = "Password must be filled";
+		}
+		else {
+			err = "unknown error";
+		}
+	}
 %>
 	<div style="text-align: center">
 		<h1 style="color: #FFA300; font-weight: normal">Welcome to Bluelight</h1>
@@ -27,12 +42,12 @@ if (session.getAttribute("name") == null && false)
 		<form method='post' action='dologin.jsp'>
 			<table style="margin: 0 auto;">
 				<tr>
-					<td> Username </td>
-					<td> <input type='text' name='user'/> </td>
+					<td>Username</td>
+					<td><input type='text' name='username'/></td>
 				</tr>
 				<tr>
-					<td> Password </td>
-					<td> <input type='password' name='pass'/> </td>
+					<td>Password</td>
+					<td><input type='password' name='password'/></td>
 				</tr>
 				<tr>
 					<td colspan='2' style="text-align: center">
@@ -42,7 +57,7 @@ if (session.getAttribute("name") == null && false)
 				</tr>
 <% if (err != null) { %>
 				<tr>
-					<td colspan='2' color='red'> <%=err%> </td>
+					<td colspan='2'><span class="error"><%=err%></span></td>
 				</tr>
 <% } %>
 				<tr>
@@ -52,11 +67,24 @@ if (session.getAttribute("name") == null && false)
 		</form>
 	</div>
 <% } else {
-	name = (String)session.getAttribute("name");
-	String onlineMember = "2";
-	String loginTime = "2013-08-24 14:33:55";
+	// logged in
+	userId		= (String)session.getAttribute("UserID");
+	username	= (String)session.getAttribute("username");
+	firstName	= (String)session.getAttribute("FirstName");
+	middleName	= (String)session.getAttribute("MiddleName");
+	lastName	= (String)session.getAttribute("LastName");
+	email		= (String)session.getAttribute("Email");
+	phone		= (String)session.getAttribute("Phone");
+	address		= (String)session.getAttribute("Address");
+	loginTime	= (String)session.getAttribute("LoginTime");
+
+	String fullName = firstName;
+	if (middleName != null && !middleName.equals("")) fullName += " " + middleName;
+	if (!lastName.equals("")) fullName += " " + lastName;
+	
+	Integer onlineMember = (Integer) application.getAttribute("onlineMember");
 %>
-	<div><span style="color: #00FFFF">Welcome, <%=name%></span></div>
+	<div><span style="color: #00FFFF">Welcome, <%=fullName%></span></div>
 	<div><span style="color: #FF00FF">Online Member: <%=onlineMember%></span></div>
 
 	<div style="text-align: center">
@@ -72,4 +100,6 @@ if (session.getAttribute("name") == null && false)
 
 
 </div>
-<%@include file='template/templateEnd.jsp'%>
+<t:templateFoot>
+	<jsp:attribute name="footer"></jsp:attribute>
+</t:templateFoot>
