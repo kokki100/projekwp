@@ -81,16 +81,7 @@ if (session.getAttribute("UserID") == null)
 	phone		= (String)session.getAttribute("Phone");
 	address		= (String)session.getAttribute("Address");
 	loginTime	= (String)session.getAttribute("LoginTime");
-
-	String fullName = firstName;
-	if (middleName != null && !middleName.equals("")) fullName += " " + middleName;
-	if (!lastName.equals("")) fullName += " " + lastName;
-	
-	Integer onlineMember = (Integer) application.getAttribute("onlineMember");
 %>
-	<div><span style="color: #00FFFF">Welcome, <%=fullName%></span></div>
-	<div><span style="color: #FF00FF">Online Member: <%=onlineMember%></span></div>
-
 	<div style="text-align: center">
 		<h1 style="color: #FFA300; font-weight: normal">Welcome to Bluelight</h1>
 

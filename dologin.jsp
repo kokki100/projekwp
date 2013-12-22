@@ -17,10 +17,14 @@
 
 <%@include file="connect.jsp"%>
 <%
-	String query = "SELECT Profile.UserID, Profile.FirstName, Profile.MiddleName, Profile.LastName, Profile.Email, Profile.Phone, Profile.Address, NOW() AS LoginTime FROM User INNER JOIN Profile ON User.UserID = Profile.UserID WHERE User.UserName = '" + username + "' AND User.Password = '" + password + "'";
+	String query = "SELECT User.IsAdmin, User.Password, Profile.UserID, Profile.FirstName, Profile.MiddleName, Profile.LastName, Profile.Email, Profile.Phone, Profile.Address, NOW() AS LoginTime FROM User INNER JOIN Profile ON User.UserID = Profile.UserID WHERE User.UserName = '" + username + "' AND User.Password = '" + password + "'";
 	ResultSet rs = st.executeQuery(query);
-	String userId, firstName, middleName, lastName, email, phone, address, loginTime;
+	String userId, firstName, middleName, lastName, email, phone, address, loginTime, isAdmin;
 	if (rs.next()) {
+		if (!password.equals(rs.getString("Password"))) {
+			response.sendRedirect("home.jsp?err=invalidlogin"); return;
+		}
+		isAdmin		= rs.getString("IsAdmin");
 		userId		= rs.getString("UserID");
 		firstName	= rs.getString("FirstName");
 		middleName	= rs.getString("MiddleName");
@@ -31,12 +35,13 @@
 		loginTime	= rs.getString("LoginTime");
 	}
 	else {
-		response.sendRedirect("home.jsp?err=invalidlogin");return;
+		response.sendRedirect("home.jsp?err=invalidlogin"); return;
 	}
 
 	// validation passed
 	if (remember!=null)
 	{
+		Cookie cIsAdmin		= new Cookie("IsAdmin",		isAdmin);
 		Cookie cUserId		= new Cookie("UserID",		userId);
 		Cookie cUsername	= new Cookie("Username",	username);
 		Cookie cFirstName	= new Cookie("FirstName",	firstName);
@@ -48,6 +53,7 @@
 		Cookie cLoginTime	= new Cookie("LoginTime",	loginTime);
 
 		int cookieAge = 60 * 60 * 24;
+		cIsAdmin.setMaxAge(cookieAge);
 		cUserId.setMaxAge(cookieAge);
 		cUsername.setMaxAge(cookieAge);
 		cFirstName.setMaxAge(cookieAge);
@@ -58,6 +64,7 @@
 		cAddress.setMaxAge(cookieAge);
 		cLoginTime.setMaxAge(cookieAge);
 
+		response.addCookie(cIsAdmin);
 		response.addCookie(cUserId);
 		response.addCookie(cUsername);
 		response.addCookie(cFirstName);
@@ -74,6 +81,7 @@
 		session.setAttribute("isRemember",	false);
 	}
 
+	session.setAttribute("IsAdmin",		isAdmin);
 	session.setAttribute("username",	username);
 	session.setAttribute("UserID",		userId);
 	session.setAttribute("FirstName",	firstName);

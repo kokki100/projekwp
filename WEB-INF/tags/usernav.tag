@@ -8,7 +8,11 @@ if (cookies!=null) {
 	for (int i = 0; i < len; i++) {
 		int cookieAge = 60 * 60 * 24;
 		cookies[i].setMaxAge(cookieAge);
-		if(cookies[i].getName().equals("Username")) {
+		if(cookies[i].getName().equals("IsAdmin")) {
+			session.setAttribute("IsAdmin", cookies[i].getValue());
+			continue;
+		}
+		else if(cookies[i].getName().equals("Username")) {
 			session.setAttribute("username", cookies[i].getValue());
 			continue;
 		}
@@ -65,6 +69,11 @@ else {
 			</a>
 		</li>
 		<li>
+			<a href="logout.jsp">
+				Logout
+			</a>
+		</li>
+		<li>
 			<a href="changepassword.jsp">
 				Change Password
 			</a>
@@ -86,3 +95,25 @@ else {
 		</li>
 	</ul>
 </div>
+
+<%
+String userId = "", username = "", firstName = "", middleName = "", lastName = "", email = "", phone = "", address = "", loginTime = "";
+userId		= (String)session.getAttribute("UserID");
+username	= (String)session.getAttribute("username");
+firstName	= (String)session.getAttribute("FirstName");
+middleName	= (String)session.getAttribute("MiddleName");
+lastName	= (String)session.getAttribute("LastName");
+email		= (String)session.getAttribute("Email");
+phone		= (String)session.getAttribute("Phone");
+address		= (String)session.getAttribute("Address");
+loginTime	= (String)session.getAttribute("LoginTime");
+
+String fullName = firstName;
+if (middleName != null && !middleName.equals("")) fullName += " " + middleName;
+if (!lastName.equals("")) fullName += " " + lastName;
+
+Integer onlineMember = (Integer) application.getAttribute("onlineMember");
+%>
+
+<div><span style="color: #00FFFF">Welcome, <%=fullName%></span></div>
+<div><span style="color: #FF00FF">Online Member: <%=onlineMember%></span></div>

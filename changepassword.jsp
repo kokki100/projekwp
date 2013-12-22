@@ -28,33 +28,38 @@ else if (mess != null) {
 }
 %>
 <div style="width: 100%;">
-	Updating Profile <br />
-	Change Password Form <br />
-	<form method='post' action='dochangepass.jsp'>
-		<table>
-			<tr>
-				<td>Old Password</td>
-				<td>:</td>
-				<td><input type='password' name='old' /></td>
-			</tr>
-			<tr>
-				<td>New Password</td>
-				<td>:</td>
-				<td><input type='password' name='new' /></td>
-			</tr>
-			<tr>
-				<td>Confirm New Password</td>
-				<td>:</td>
-				<td><input type='password' name='connew' /></td>
-			</tr>
-		</table>
-		<input type='submit' value='Change Password' />
-	</form>
+	<div style="text-align: center">
+		<h1 style="color: #FFA300; font-weight: normal">Updating Profile</h1>
+
+		<span style="color: #FF00FF">Change Password Form</span>
+		<form method='post' action='dochangepass.jsp'>
+			<table style="margin: 0 auto; text-align: left;">
+				<tr>
+					<td>Old Password</td>
+					<td>:</td>
+					<td><input type='password' name='old' /></td>
+				</tr>
+				<tr>
+					<td>New Password</td>
+					<td>:</td>
+					<td><input type='password' name='new' /></td>
+				</tr>
+				<tr>
+					<td>Confirm New Password</td>
+					<td>:</td>
+					<td><input type='password' name='connew' /></td>
+				</tr>
+			</table>
 <% if (err != null) { %>
-	<span class="error"><%=err%></span>
+			<div><span class="error"><%=err%></span></div>
 <% } else if (mess != null) { %>
-	<span class="message"><%=mess%></span>
+			<div><span class="message"><%=mess%></span></div>
 <% } %>
+			<input type='submit' value='Change Password' />
+		</form>
+
+	</div>
+
 </div>
 
 <t:templateFoot>
