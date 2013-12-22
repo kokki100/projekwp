@@ -25,7 +25,7 @@ a {
 }
 
 #content {
-	min-height: 200px;
+	min-height: 300px;
 	padding: 20px;
 }
 
@@ -51,8 +51,7 @@ a {
 	vertical-align: middle;
 }
 #main-nav ul li {
-	height: 100%;
-	width: 25%;
+	padding: 15px 25px 15px 15px;
 	float: left;
 	display: inline-block;
 	text-align: center;
@@ -66,10 +65,13 @@ a {
 	position: relative;
 	text-decoration: none;
 	vertical-align: middle;
-	margin-top: 15px;
 }
 
 #main-nav ul li a:hover, #main-nav ul li a.active {
 	text-decoration: underline;
 	font-weight: bold;
+}
+
+.error {
+	color: #FF0000;
 }
