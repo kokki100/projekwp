@@ -54,33 +54,33 @@ if (session.getAttribute("UserID") != null) {
 }
 else {
 	// no session exists
-	response.sendRedirect("home.jsp");
+	response.sendRedirect("home.jsp?err=nosession");
 }
 %>
 <div id="main-nav">
 	<ul>
 		<li>
-			<a href="#">
+			<a href="home.jsp">
 				Home
 			</a>
 		</li>
 		<li>
-			<a href="#">
+			<a href="changepassword.jsp">
 				Change Password
 			</a>
 		</li>
 		<li>
-			<a href="#">
+			<a href="product.jsp">
 				Product
 			</a>
 		</li>
 		<li>
-			<a href="#">
+			<a href="testimonial.jsp">
 				Testimonial
 			</a>
 		</li>
 		<li>
-			<a href="#">
+			<a href="services.jsp">
 				Services
 			</a>
 		</li>

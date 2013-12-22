@@ -1,6 +1,7 @@
 <%
 	session.invalidate();
 	Integer onlineMember = (Integer) application.getAttribute("onlineMember");
+	if (onlineMember == null) onlineMember = 1;
 	onlineMember--;
 	application.setAttribute("onlineMember", onlineMember);
 
