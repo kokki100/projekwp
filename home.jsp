@@ -11,7 +11,6 @@
 <%
 String userId = "", username = "";
 String firstName = "", middleName = "", lastName = "", email = "", phone = "", address = "", loginTime = "";
-Cookie[] cookies = request.getCookies();
 
 if (session.getAttribute("UserID") == null)
 {

@@ -5,7 +5,13 @@
 	<jsp:attribute name="header"></jsp:attribute>
 	<jsp:attribute name="content"></jsp:attribute>
 </t:templateHead>
-
+<%
+if (session.getAttribute("UserID") == null)
+{
+	// not logged in
+	response.sendRedirect("home.jsp?err=nosession"); return;
+}
+%>
 <%
 String err = request.getParameter("err");
 String mess = request.getParameter("mess");

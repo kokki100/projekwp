@@ -115,5 +115,7 @@ if (!lastName.equals("")) fullName += " " + lastName;
 Integer onlineMember = (Integer) application.getAttribute("onlineMember");
 %>
 
-<div><span style="color: #00FFFF">Welcome, <%=fullName%></span></div>
-<div><span style="color: #FF00FF">Online Member: <%=onlineMember%></span></div>
+<div class="greeting">
+	<div><span style="color: #00FFFF">Welcome, <%=fullName%></span></div>
+	<div><span style="color: #FF00FF">Online Member: <%=onlineMember%></span></div>
+</div>
