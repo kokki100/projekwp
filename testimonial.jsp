@@ -1,6 +1,6 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ page language="java" import="java.util.*"%>
-<%@ include file = "connect.jsp" %>
+<%@ include file = "connect-sample.jsp" %>
 <t:templateHead>
 	<jsp:attribute name="pageTitle">Bluelight Online Shop</jsp:attribute>
 	<jsp:attribute name="header"></jsp:attribute>
