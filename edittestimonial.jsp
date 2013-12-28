@@ -46,7 +46,7 @@
 				%>
 					<h5 style="color: aqua">Testimonial Editor</h5>
 					
-					<form method="post" <% out.print("action=\"doedittesti.jsp?TestimonyID="+TestimonyID+"\" "); %> >
+					<form method="post" action="doedittesti.jsp?TestimonyID=<%=TestimonyID%>"\>
 						<textarea rows="4" cols="40" name="testimony"></textarea>
 						</br>
 						<% if (err != null && !err.equals("")) { %>
