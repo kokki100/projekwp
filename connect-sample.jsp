@@ -3,5 +3,5 @@
  Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
  Connection con = DriverManager.getConnection("jdbc:odbc:driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=" + application.getRealPath("WEB-INF/BlueLight.accdb"));
 
- Statement st = con.createStatement(1004,1008);
+ Statement stmt = con.createStatement(1004,1008);
 %>
