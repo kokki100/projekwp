@@ -7,7 +7,7 @@
 	String telephone=request.getParameter("telephone");
 	String email=request.getParameter("email");
 	
-	if (username == null || username.equals("")) {
+	if (username == null || username.equals("")){
 		response.sendRedirect("register.jsp?err=username must be filled");
 		return;
 	}
@@ -21,12 +21,12 @@
 		return;
 	}
 	
-	if (password == null || password.equals("")) {
+	if (password == null || password.equals("")){
 		response.sendRedirect("register.jsp?err=pasword must be filled");
 		return;
 	}
 	
-	if (conpass == null || conpass.equals("")) {
+	if (conpass == null || conpass.equals("")){
 		response.sendRedirect("register.jsp?err=confirm password must be filed");
 		return;
 	}
@@ -36,7 +36,7 @@
 		return;
 	}
 	
-	if (address == null || address.equals("")) {
+	if (address == null || address.equals("")){
 		response.sendRedirect("register.jsp?err=address must be filed");
 		return;
 	}
@@ -56,7 +56,7 @@
 		return;
 	}
 	
-	if (telephone == null || telephone.equals("")) {
+	if (telephone == null || telephone.equals("")){
 		response.sendRedirect("register.jsp?err=telephone must be filed");
 		return;
 	}
@@ -73,7 +73,7 @@
 		return;
 	}
 		
-	if (email == null || email.equals("")) {
+	if (email == null || email.equals("")){
 		response.sendRedirect("register.jsp?err=email must be filed");
 		return;
 	}

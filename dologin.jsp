@@ -4,11 +4,11 @@
 	String remember=request.getParameter("remember");
 
 	// validation start
-	if (username == null || username.equals("")) {
+	if (username == null || username.equals("")){
 		response.sendRedirect("home.jsp?err=nousername");
 		return;
 	}
-	if (password == null || password.equals("")) {
+	if (password == null || password.equals("")){
 		response.sendRedirect("home.jsp?err=nopassword");
 		return;
 	}

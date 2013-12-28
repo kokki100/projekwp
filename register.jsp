@@ -14,7 +14,7 @@
 %>
 
 	<div style="text-align: center">
-		<h1 style="color: #FFA300; font-weight: normal">REGISTER</h1>
+		<h1 style="color: #FFA300; font-weight: normal">Register</h1>
 
 		<span style="color: #FF00FF">Register Form</span>
 

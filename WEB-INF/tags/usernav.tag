@@ -60,17 +60,17 @@ else {
 <div id="main-nav">
 	<ul>
 		<li>
-			<a href="#">
+			<a href="home.jsp">
 				Home
 			</a>
 		</li>
 		<li>
-			<a href="#">
+			<a href="changepass.jsp">
 				Change Password
 			</a>
 		</li>
 		<li>
-			<a href="#">
+			<a href="product.jsp">
 				Product
 			</a>
 		</li>
