@@ -1,3 +1,9 @@
+<%
+String userId = (String) session.getAttribute("UserID");
+if (userId == null) {
+	response.sendRedirect("home.jsp?err=nosession");
+}
+%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ page language="java" import="java.util.*"%>
 <t:templateHead>
@@ -7,33 +13,38 @@
 </t:templateHead>
 <%@ include file='connect.jsp' %>
 <%
-if (err == null || err.equals("")) err = "";
-else {
-	if (err.equals("noqty")) {
-		err = "Quantity must be filled and must be more than 1";
-	}
-	else if (err.equals("qtynotnumber")) {
-		err = "Quantity must be filled with number";
-	}
-	else if (err.equals("insufficientstock")) {
-		err = "Insufficient Stock";
-	}
-	else {
-		err = "Unknown Error";
-	}
-}
+// String err;
+// if (err == null || err.equals("")) err = "";
+// else {
+// 	if (err.equals("noqty")) {
+// 		err = "Quantity must be filled and must be more than 1";
+// 	}
+// 	else if (err.equals("qtynotnumber")) {
+// 		err = "Quantity must be filled with number";
+// 	}
+// 	else if (err.equals("insufficientstock")) {
+// 		err = "Insufficient Stock";
+// 	}
+// 	else {
+// 		err = "Unknown Error";
+// 	}
+// }
 
 String query = "";
 ResultSet rs = null;
 
-String userId = (String) session.getAttribute("UserID");
-query = "SELECT * FROM Cart WHERE UserID = "+userId;
+query = "SELECT CartID, ProductName, Quantity, Price FROM Cart INNER JOIN Product ON Product.ProductID = Cart.ProductID WHERE UserID = "+userId;
 rs = st.executeQuery(query);
-
+ArrayList<String[]> cartItems = new ArrayList<String[]>();
+int totalItem = 0;
 while(rs.next()) {
-	String cartId, productId, price;
-	rs.getString("CartID");
-	rs.getString("");
+	String cartId, productName, price, quantity;
+	cartId		= rs.getString("CartID");
+	productName	= rs.getString("ProductName");
+	quantity	= rs.getString("Quantity");
+	price		= rs.getString("Price");
+	cartItems.add(new String[] {cartId, productName, quantity, price});
+	totalItem++;
 }
 
 con.close();
@@ -42,7 +53,7 @@ con.close();
 	<div style="text-align: center">
 		<h1 style="color: #FFA300; font-weight: normal">My Cart</h1>
 
-		<form action="maketransaction.jsp">
+		<form method="post" action="maketransaction.jsp">
 			<table style="margin: 0 auto; text-align: left" class="withborder">
 				<thead>
 					<tr>
@@ -53,24 +64,38 @@ con.close();
 					</tr>
 				</thead>
 				<tbody>
+<%
+String cartId, productName;
+int price, quantity, subTotal = 0, grandTotal = 0;
+for (int i = 0; i < totalItem; i++) {
+	cartId		= cartItems.get(i)[0];
+	productName	= cartItems.get(i)[1];
+	quantity	= Integer.parseInt(cartItems.get(i)[2]);
+	price		= Integer.parseInt(cartItems.get(i)[3]);
+	subTotal	= quantity * price;
+	grandTotal += subTotal;
+%>
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td><%=productName%></td>
+						<td><%=price%></td>
+						<td><%=quantity%></td>
+						<td style="text-align: right"><%=subTotal%></td>
 					</tr>
+<% } %>
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="3" style="text-align: right; color: #FF0000; border: 1px solid #FF0000">Grand Total</td>
-						<td style="text-align: right; color: #FF0000; border: 1px solid #FF0000"></td>
+						<td colspan="3" style="text-align: right; color: #FF0000;">Grand Total</td>
+						<td style="text-align: right; color: #FF0000;"><%=grandTotal%></td>
 					</tr>
+<% if (totalItem > 0) { %>
 					<tr>
 						<td colspan="4" style="text-align: center">
-							<button>Make Transaction</button>
-							<a href="doclearcart.jsp">Clear cart</a>
+							<button>Make Transaction/Buy</button>
+							<a href="clearcart.jsp">Clear cart</a>
 						</td>
 					</tr>
+<% } %>
 				</tfoot>
 			</table>
 		</form>

@@ -72,45 +72,30 @@ if (request.getParameter("addcart") != null && request.getParameter("addcart").e
 	if (validation) {
 		String userId = (String) session.getAttribute("UserID");
 		int q = Integer.parseInt(qty);
+		int s = Integer.parseInt(stock);
+		s -= q;
+		query = "UPDATE Stock SET Stock = "+s+" WHERE ProductID = "+productId;
+		st.executeUpdate(query);
 
 		query = "SELECT CartID, Quantity FROM Cart WHERE UserID = "+userId+" AND ProductID = "+productId;
 		rs = st.executeQuery(query);
+		int newq = q;
+		String cartId;
 		if (rs.next()) {
-			q += Integer.parseInt(rs.getString("Quantity"));
-			try {
-				query = "UPDATE Cart SET Quantity = "+q+" WHERE CartID = "+rs.getString("CartID");
-				st.executeUpdate(query);
-
-				int s = Integer.parseInt(stock);
-				s--;
-				query = "UPDATE Stock SET Stock = "+s+" WHERE ProductID = "+productId;
-				st.executeUpdate(query);
-				con.close();
-				response.sendRedirect("cart.jsp"); return;
-			}
-			catch (Exception e) {
-				err = "unknownerror";
-				validation = false;
-			}
+			newq += Integer.parseInt(rs.getString("Quantity"));
+			cartId = rs.getString("CartID");
+			query = "UPDATE Cart SET Quantity = "+newq+" WHERE CartID = "+cartId;
 		}
 		else {
-			try {
-				query = "INSERT INTO Cart (UserID, ProductID, Quantity) VALUES ("+userId+", "+productId+", "+q+")";
-				st.executeUpdate(query);
-
-				int s = Integer.parseInt(stock);
-				s--;
-				query = "UPDATE Stock SET Stock = "+s+" WHERE ProductID = "+productId;
-				st.executeUpdate(query);
-				con.close();
-				response.sendRedirect("cart.jsp"); return;
-			}
-			catch (Exception e) {
-				err = "unknownerror";
-				validation = false;
-			}
+			query = "INSERT INTO Cart (UserID, ProductID, Quantity) VALUES ("+userId+", "+productId+", "+q+")";
 		}
+		st.executeUpdate(query);
+
+
+		con.close();
+		response.sendRedirect("cart.jsp"); return;
 	}
+	con.close();
 }
 %>
 
@@ -138,7 +123,6 @@ else {
 	}
 }
 
-con.close();
 %>
 <div style="width: 100%;">
 	<div style="text-align: center">
