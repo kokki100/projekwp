@@ -17,12 +17,12 @@
 		response.sendRedirect("changepassword.jsp?err=conempty"); return;}
 	
 	String query = "SELECT 1 FROM User WHERE UserID = "+userId+" AND Password = '"+password+"'";
-	ResultSet rs = stmt.executeQuery(query);
+	ResultSet rs = st.executeQuery(query);
 	if (rs.next()) {
 		// true
 		if (newPassword.equals(cNewPassword)) {
 			query = "UPDATE User SET Password = '"+newPassword+"' WHERE UserID = "+userId;
-			stmt.executeUpdate(query);
+			st.executeUpdate(query);
 			con.close();
 			response.sendRedirect("changepassword.jsp?mess=success"); return;
 		}
