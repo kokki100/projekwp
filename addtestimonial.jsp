@@ -15,7 +15,7 @@
 	}
 	catch (Exception e){
 		con.close();
-		response.sendRedirect("register.jsp?err=unknownerror"); return;
+		response.sendRedirect("testimonial.jsp?err=unknownerror"); return;
 	}
 	
 	con.close();

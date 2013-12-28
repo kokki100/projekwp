@@ -29,7 +29,10 @@
 	}
 	else {
 		if (mess.equals("success")) {
-			mess = "Register success";
+			mess = "Add success";
+		}
+		if (mess.equals("dsuccess")) {
+			mess = "Delete success";
 		}
 	}
 %>
@@ -40,14 +43,16 @@
 
 		<table style="margin: 0 auto; text-align: left">
 			<%
-				String query = "SELECT User.UserName, Testimony.Testimony FROM Testimony INNER JOIN User ON User.UserID = Testimony.UserID ORDER BY TestimonyID";
+				String query = "SELECT User.UserName, Testimony.Testimony, Testimony.TestimonyID FROM Testimony INNER JOIN User ON User.UserID = Testimony.UserID ORDER BY TestimonyID";
 				ResultSet rs = st.executeQuery(query);
 	
 				String username= (String)session.getAttribute("username");
 				String isAdmin = (String) session.getAttribute("IsAdmin");
+				String TestimonyID;
 				
 				while(rs.next())
 				{
+					TestimonyID=rs.getString("TestimonyID");
 					%>
 					<tr>
 					<td style="color: green" width="80">
@@ -70,7 +75,7 @@
 							//admin
 							%>
 							<td>
-							<a href=#>X</a>
+							<% out.print("<a href= removetestimonial.jsp?TestimonyID="+TestimonyID+">X</a>"); %>
 							</td>
 							<%
 						}
@@ -81,10 +86,10 @@
 							{
 							%>
 							<td>
-							<a href=#>EDIT</a>
+							<% out.print("<a href= edittestimonial.jsp?TestimonyID="+TestimonyID+">EDIT</a>"); %>
 							</td>
 							<td>
-							<a href=#>X</a>
+							<% out.print("<a href= removetestimonial.jsp?TestimonyID="+TestimonyID+">X</a>"); %>
 							</td>
 							<%
 							}
@@ -103,14 +108,15 @@
 				//logged in
 				%>
 					<h5 style="color: aqua">Testimonial Editor</h5>
-					<% if (err != null && !err.equals("")) { %>
-								<div><span class="error"><%=err%></span></div>
-					<% } else if (mess != null && !mess.equals("")) { %>
-								<div><span class="message"><%=mess%></span></div>
-					<% } %>
+					
 					<form method="post" action="addtestimonial.jsp">
 						<textarea rows="4" cols="40" name="testimony"></textarea>
 						</br>
+						<% if (err != null && !err.equals("")) { %>
+								<div><span class="error"><%=err%></span></div>
+						<% } else if (mess != null && !mess.equals("")) { %>
+									<div><span class="message"><%=mess%></span></div>
+						<% } %>
 						<input type="submit" value="Submit"/>
 					</form>
 				<%
