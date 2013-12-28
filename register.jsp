@@ -113,15 +113,9 @@ else {
 
 		</form>
 	</div>
-<<<<<<< HEAD
 </div>
 
-=======
 
-
-
-</div>
->>>>>>> aa6cc45ec8c7cbdcbe000e1a7aff4d1a9d4b519b
 <t:templateFoot>
 	<jsp:attribute name="footer"></jsp:attribute>
 </t:templateFoot>
