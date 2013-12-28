@@ -22,9 +22,6 @@ if (session.getAttribute("UserID") == null)
 	// logged in
 	userId		= (String)session.getAttribute("UserID");
 	username	= (String)session.getAttribute("username");
-	firstName	= (String)session.getAttribute("FirstName");
-	middleName	= (String)session.getAttribute("MiddleName");
-	lastName	= (String)session.getAttribute("LastName");
 	email		= (String)session.getAttribute("Email");
 	phone		= (String)session.getAttribute("Phone");
 	address		= (String)session.getAttribute("Address");

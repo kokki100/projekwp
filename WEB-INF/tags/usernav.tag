@@ -20,18 +20,6 @@ if (cookies!=null) {
 			session.setAttribute("UserID", cookies[i].getValue());
 			continue;
 		}
-		else if(cookies[i].getName().equals("FirstName")) {
-			session.setAttribute("FirstName", cookies[i].getValue());
-			continue;
-		}
-		else if(cookies[i].getName().equals("MiddleName")) {
-			session.setAttribute("MiddleName", cookies[i].getValue());
-			continue;
-		}
-		else if(cookies[i].getName().equals("LastName")) {
-			session.setAttribute("LastName", cookies[i].getValue());
-			continue;
-		}
 		else if(cookies[i].getName().equals("Email")) {
 			session.setAttribute("Email", cookies[i].getValue());
 			continue;
@@ -97,25 +85,31 @@ else {
 </div>
 
 <%
-String userId = "", username = "", firstName = "", middleName = "", lastName = "", email = "", phone = "", address = "", loginTime = "";
+String userId = "", username = "", email = "", phone = "", address = "", loginTime = "";
 userId		= (String)session.getAttribute("UserID");
 username	= (String)session.getAttribute("username");
-firstName	= (String)session.getAttribute("FirstName");
-middleName	= (String)session.getAttribute("MiddleName");
-lastName	= (String)session.getAttribute("LastName");
 email		= (String)session.getAttribute("Email");
 phone		= (String)session.getAttribute("Phone");
 address		= (String)session.getAttribute("Address");
 loginTime	= (String)session.getAttribute("LoginTime");
 
-String fullName = firstName;
-if (middleName != null && !middleName.equals("")) fullName += " " + middleName;
-if (!lastName.equals("")) fullName += " " + lastName;
-
-Integer onlineMember = (Integer) application.getAttribute("onlineMember");
+int onlineMember;
+if (application.getAttribute("onlineMember") == null) {
+	onlineMember = 1;
+	application.setAttribute("onlineMember",onlineMember);
+}
+else {
+	try {
+		onlineMember = (Integer) application.getAttribute("onlineMember");
+	}
+	catch (Exception e) {
+		onlineMember = 1;
+		application.setAttribute("onlineMember",onlineMember);
+	}
+}
 %>
 
 <div class="greeting">
-	<div><span style="color: #00FFFF">Welcome, <%=fullName%></span></div>
+	<div><span style="color: #00FFFF">Welcome, <%=username%></span></div>
 	<div><span style="color: #FF00FF">Online Member: <%=onlineMember%></span></div>
 </div>

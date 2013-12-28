@@ -17,18 +17,16 @@
 
 <%@include file="connect.jsp"%>
 <%
-	String query = "SELECT User.IsAdmin, User.Password, Profile.UserID, Profile.FirstName, Profile.MiddleName, Profile.LastName, Profile.Email, Profile.Phone, Profile.Address, NOW() AS LoginTime FROM User INNER JOIN Profile ON User.UserID = Profile.UserID WHERE User.UserName = '" + username + "' AND User.Password = '" + password + "'";
+	String query = "SELECT IsAdmin, Password, UserID, Address, Phone, Email, NOW() AS LoginTime FROM User WHERE UserName = '" + username + "' AND Password = '" + password + "'";
+
 	ResultSet rs = st.executeQuery(query);
-	String userId, firstName, middleName, lastName, email, phone, address, loginTime, isAdmin;
+	String userId, email, phone, address, loginTime, isAdmin;
 	if (rs.next()) {
 		if (!password.equals(rs.getString("Password"))) {
 			response.sendRedirect("home.jsp?err=invalidlogin"); return;
 		}
 		isAdmin		= rs.getString("IsAdmin");
 		userId		= rs.getString("UserID");
-		firstName	= rs.getString("FirstName");
-		middleName	= rs.getString("MiddleName");
-		lastName	= rs.getString("LastName");
 		email		= rs.getString("Email");
 		phone 		= rs.getString("Phone");
 		address 	= rs.getString("Address");
@@ -37,16 +35,13 @@
 	else {
 		response.sendRedirect("home.jsp?err=invalidlogin"); return;
 	}
-
+	con.close();
 	// validation passed
 	if (remember!=null)
 	{
 		Cookie cIsAdmin		= new Cookie("IsAdmin",		isAdmin);
 		Cookie cUserId		= new Cookie("UserID",		userId);
 		Cookie cUsername	= new Cookie("Username",	username);
-		Cookie cFirstName	= new Cookie("FirstName",	firstName);
-		Cookie cMiddleName	= new Cookie("MiddleName",	middleName);
-		Cookie cLastName	= new Cookie("LastName",	lastName);
 		Cookie cEmail		= new Cookie("Email",		email);
 		Cookie cPhone		= new Cookie("Phone",		phone);
 		Cookie cAddress		= new Cookie("Address",		address);
@@ -56,9 +51,6 @@
 		cIsAdmin.setMaxAge(cookieAge);
 		cUserId.setMaxAge(cookieAge);
 		cUsername.setMaxAge(cookieAge);
-		cFirstName.setMaxAge(cookieAge);
-		cMiddleName.setMaxAge(cookieAge);
-		cLastName.setMaxAge(cookieAge);
 		cEmail.setMaxAge(cookieAge);
 		cPhone.setMaxAge(cookieAge);
 		cAddress.setMaxAge(cookieAge);
@@ -67,9 +59,6 @@
 		response.addCookie(cIsAdmin);
 		response.addCookie(cUserId);
 		response.addCookie(cUsername);
-		response.addCookie(cFirstName);
-		response.addCookie(cMiddleName);
-		response.addCookie(cLastName);
 		response.addCookie(cEmail);
 		response.addCookie(cPhone);
 		response.addCookie(cAddress);
@@ -84,9 +73,6 @@
 	session.setAttribute("IsAdmin",		isAdmin);
 	session.setAttribute("username",	username);
 	session.setAttribute("UserID",		userId);
-	session.setAttribute("FirstName",	firstName);
-	session.setAttribute("MiddleName",	middleName);
-	session.setAttribute("LastName",	lastName);
 	session.setAttribute("Email",		email);
 	session.setAttribute("Phone",		phone);
 	session.setAttribute("Address",		address);

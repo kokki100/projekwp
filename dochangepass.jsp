@@ -14,14 +14,17 @@
 		if (newPassword.equals(cNewPassword)) {
 			query = "UPDATE User SET Password = '"+newPassword+"' WHERE UserID = "+userId;
 			st.executeUpdate(query);
+			con.close();
 			response.sendRedirect("changepassword.jsp?mess=success"); return;
 		}
 		else {
+			con.close();
 			response.sendRedirect("changepassword.jsp?err=confirmpassword"); return;
 		}
 	}
 	else {
 		// wrong password
+		con.close();
 		response.sendRedirect("changepassword.jsp?err=wrongpassword"); return;
 	}
 %>

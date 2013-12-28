@@ -29,19 +29,28 @@ else {
 	else if (err.equals("confirmpassword")) {
 		err = "Password and Confirm password must be exactly the same.";
 	}
-	else if (err.equals("nofirstname")) {
-		err = "First Name must be filled";
-	}
 	else if (err.equals("noaddress")) {
 		err = "Address must be filled";
+	}
+	else if (err.equals("shortaddress")) {
+		err = "Address must be at least 10 characters";
+	}
+	else if (err.equals("wrongaddressformat")) {
+		err = "Address must contain the word 'street'";
 	}
 	else if (err.equals("nophone")) {
 		err = "Phone number must be filled";
 	}
+	else if (err.equals("wrongphoneformat")) {
+		err = "Phone must be filled only with numbers";
+	}
+	else if (err.equals("wrongphonelength")) {
+		err = "Phone must be 12-15 digits only";
+	}
 	else if (err.equals("noemail")) {
 		err = "Email must be filled";
 	}
-	else if (err.equals("wrongemail")) {
+	else if (err.equals("wrongemailformat")) {
 		err = "Please enter the right Email format xxx@yyy.zzz";
 	}
 	else {
@@ -80,21 +89,6 @@ else {
 					<td><input type='password' name='cpassword' /></td>
 				</tr>
 				<tr>
-					<td>First Name</td>
-					<td>:</td>
-					<td><input type='text' name='firstName' /></td>
-				</tr>
-				<tr>
-					<td>Middle Name</td>
-					<td>:</td>
-					<td><input type='text' name='middleName' /></td>
-				</tr>
-				<tr>
-					<td>Last Name</td>
-					<td>:</td>
-					<td><input type='text' name='lastName' /></td>
-				</tr>
-				<tr>
 					<td>Address</td>
 					<td>:</td>
 					<td><input type='text' name='address' /></td>
@@ -110,9 +104,9 @@ else {
 					<td><input type='text' name='email' /></td>
 				</tr>
 			</table>
-<% if (err != null) { %>
+<% if (err != null && !err.equals("")) { %>
 			<div><span class="error"><%=err%></span></div>
-<% } else if (mess != null) { %>
+<% } else if (mess != null && !mess.equals("")) { %>
 			<div><span class="message"><%=mess%></span></div>
 <% } %>
 			<input type='submit' value='Register' />
