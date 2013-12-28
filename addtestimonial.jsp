@@ -8,7 +8,8 @@
 		response.sendRedirect("testimonial.jsp?err=empty"); return;}
 	if (testimony.length()<15){
 		response.sendRedirect("testimonial.jsp?err=toofew"); return;}
-	
+	if (testimony.contains("'")) {
+		response.sendRedirect("testimonial.jsp?err=invalidcharacter"); return;}
 	try {
 		String query = "INSERT INTO Testimony(UserID,Testimony) VALUES ('"+UserID+"', '"+testimony+"')";
 		st.executeUpdate(query);

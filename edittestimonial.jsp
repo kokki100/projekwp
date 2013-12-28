@@ -33,7 +33,20 @@
 		}
 	}
 	String isAdmin = (String) session.getAttribute("IsAdmin");
-	String TestimonyID = request.getParameter("TestimonyID");
+	String testimonyId = request.getParameter("TestimonyID");
+	String testimony;
+
+	String query = "SELECT Testimony FROM Testimony WHERE TestimonyID = "+testimonyId;
+	ResultSet rs = st.executeQuery(query);
+	if (rs.next()) {
+		testimony = rs.getString("Testimony");
+	}
+	else {
+		con.close();
+		response.sendRedirect("testimonial.jsp"); return;
+	}
+
+	con.close();
 %>
 
 <div style="width: 100%;">
@@ -46,8 +59,8 @@
 				%>
 					<h5 style="color: aqua">Testimonial Editor</h5>
 					
-					<form method="post" action="doedittesti.jsp?TestimonyID=<%=TestimonyID%>"\>
-						<textarea rows="4" cols="40" name="testimony"></textarea>
+					<form method="post" action="doedittesti.jsp?TestimonyID=<%=testimonyId%>"\>
+						<textarea rows="4" cols="40" name="testimony"><%=testimony%></textarea>
 						</br>
 						<% if (err != null && !err.equals("")) { %>
 								<div><span class="error"><%=err%></span></div>

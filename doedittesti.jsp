@@ -1,4 +1,3 @@
-<%@ include file = "connect.jsp" %>
 <%
 	String UserID = (String) session.getAttribute("UserID");
 	String username = (String) session.getAttribute("username");
@@ -9,9 +8,9 @@
 		response.sendRedirect("edittestimonial.jsp?TestimonyID="+TestimonyID+"&err=empty"); return;}
 	if (testimony.length()<15){
 		response.sendRedirect("edittestimonial.jsp?TestimonyID="+TestimonyID+"&err=toofew"); return;}
-		
-	out.print(testimony);
-	out.print(TestimonyID);
+%>
+<%@ include file = "connect.jsp" %>
+<%
 	try {
 		String query = "UPDATE Testimony SET Testimony = '"+testimony+"' WHERE TestimonyID = "+TestimonyID+"";
 		st.executeUpdate(query);
@@ -22,5 +21,5 @@
 	}
 	
 	con.close();
-	response.sendRedirect("edittestimonial.jsp?TestimonyID="+TestimonyID+"&mess=success"); return;
+	response.sendRedirect("testimonial.jsp?mess=editsuccess"); return;
 %>

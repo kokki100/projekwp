@@ -19,9 +19,14 @@
 		if (err.equals("empty")) {
 			err = "testimony must be filled";
 		}
-		else
-		if (err.equals("toofew")) {
+		else if (err.equals("toofew")) {
 			err = "testimony must contain at least 15 characters";
+		}
+		else if (err.equals("invalidcharacter")) {
+			err = "testimony must not contain special character like [']";
+		}
+		else {
+			err = "unknown error";
 		}
 	}
 	if (mess == null || mess.equals("")) {
@@ -31,8 +36,14 @@
 		if (mess.equals("success")) {
 			mess = "Add success";
 		}
-		if (mess.equals("dsuccess")) {
+		else if (mess.equals("dsuccess")) {
 			mess = "Delete success";
+		}
+		else if (mess.equals("editsuccess")) {
+			mess = "Edit success";
+		}
+		else {
+			mess = "unknown message";
 		}
 	}
 %>
@@ -99,6 +110,7 @@
 					</tr>
 					<%
 				}
+				con.close();
 			%>
 		</table>
 		
