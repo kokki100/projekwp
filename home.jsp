@@ -9,9 +9,7 @@
 <div style="width: 100%;">
 
 <%
-String userId = "", username = "";
-String firstName = "", middleName = "", lastName = "", email = "", phone = "", address = "", loginTime = "";
-Cookie[] cookies = request.getCookies();
+String userId = "", username = "", email = "", phone = "", address = "", loginTime = "";
 
 if (session.getAttribute("UserID") == null)
 {
@@ -29,6 +27,12 @@ if (session.getAttribute("UserID") == null)
 		else if (err.equals("nopassword")) {
 			err = "Password must be filled";
 		}
+		else if (err.equals("invalidlogin")) {
+			err = "Wrong combination of Username and Password";
+		}
+		else if (err.equals("nosession")) {
+			err = "You need to login first";
+		}
 		else {
 			err = "unknown error";
 		}
@@ -43,50 +47,36 @@ if (session.getAttribute("UserID") == null)
 			<table style="margin: 0 auto;">
 				<tr>
 					<td>Username</td>
+					<td>:</td>
 					<td><input type='text' name='username'/></td>
 				</tr>
 				<tr>
 					<td>Password</td>
+					<td>:</td>
 					<td><input type='password' name='password'/></td>
 				</tr>
 				<tr>
-					<td colspan='2' style="text-align: center">
+					<td colspan='3' style="text-align: center">
 						<input type='checkbox' name='remember'/>
 						Remember Me?
 					</td>
 				</tr>
-<% if (err != null) { %>
-				<tr>
-					<td colspan='2'><span class="error"><%=err%></span></td>
-				</tr>
-<% } %>
-				<tr>
-					<td colspan='2' style="text-align: center"> <input type='submit' value='login'/> </td>
-				</tr>
 			</table>
+<% if (err != null) { %>
+			<div><span class="error"><%=err%></span></div>
+<% } %>
+			<input type='submit' value='login'/>
 		</form>
 	</div>
 <% } else {
 	// logged in
 	userId		= (String)session.getAttribute("UserID");
 	username	= (String)session.getAttribute("username");
-	firstName	= (String)session.getAttribute("FirstName");
-	middleName	= (String)session.getAttribute("MiddleName");
-	lastName	= (String)session.getAttribute("LastName");
 	email		= (String)session.getAttribute("Email");
 	phone		= (String)session.getAttribute("Phone");
 	address		= (String)session.getAttribute("Address");
 	loginTime	= (String)session.getAttribute("LoginTime");
-
-	String fullName = firstName;
-	if (middleName != null && !middleName.equals("")) fullName += " " + middleName;
-	if (!lastName.equals("")) fullName += " " + lastName;
-	
-	Integer onlineMember = (Integer) application.getAttribute("onlineMember");
 %>
-	<div><span style="color: #00FFFF">Welcome, <%=fullName%></span></div>
-	<div><span style="color: #FF00FF">Online Member: <%=onlineMember%></span></div>
-
 	<div style="text-align: center">
 		<h1 style="color: #FFA300; font-weight: normal">Welcome to Bluelight</h1>
 

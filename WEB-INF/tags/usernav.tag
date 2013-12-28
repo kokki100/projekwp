@@ -8,24 +8,16 @@ if (cookies!=null) {
 	for (int i = 0; i < len; i++) {
 		int cookieAge = 60 * 60 * 24;
 		cookies[i].setMaxAge(cookieAge);
-		if(cookies[i].getName().equals("Username")) {
+		if(cookies[i].getName().equals("IsAdmin")) {
+			session.setAttribute("IsAdmin", cookies[i].getValue());
+			continue;
+		}
+		else if(cookies[i].getName().equals("Username")) {
 			session.setAttribute("username", cookies[i].getValue());
 			continue;
 		}
 		else if(cookies[i].getName().equals("UserID")) {
 			session.setAttribute("UserID", cookies[i].getValue());
-			continue;
-		}
-		else if(cookies[i].getName().equals("FirstName")) {
-			session.setAttribute("FirstName", cookies[i].getValue());
-			continue;
-		}
-		else if(cookies[i].getName().equals("MiddleName")) {
-			session.setAttribute("MiddleName", cookies[i].getValue());
-			continue;
-		}
-		else if(cookies[i].getName().equals("LastName")) {
-			session.setAttribute("LastName", cookies[i].getValue());
 			continue;
 		}
 		else if(cookies[i].getName().equals("Email")) {
@@ -54,7 +46,7 @@ if (session.getAttribute("UserID") != null) {
 }
 else {
 	// no session exists
-	response.sendRedirect("home.jsp");
+	response.sendRedirect("home.jsp?err=nosession");
 }
 %>
 <div id="main-nav">
@@ -65,7 +57,12 @@ else {
 			</a>
 		</li>
 		<li>
-			<a href="changepass.jsp">
+			<a href="logout.jsp">
+				Logout
+			</a>
+		</li>
+		<li>
+			<a href="changepassword.jsp">
 				Change Password
 			</a>
 		</li>
@@ -75,14 +72,44 @@ else {
 			</a>
 		</li>
 		<li>
-			<a href="#">
+			<a href="testimonial.jsp">
 				Testimonial
 			</a>
 		</li>
 		<li>
-			<a href="#">
+			<a href="services.jsp">
 				Services
 			</a>
 		</li>
 	</ul>
+</div>
+
+<%
+String userId = "", username = "", email = "", phone = "", address = "", loginTime = "";
+userId		= (String)session.getAttribute("UserID");
+username	= (String)session.getAttribute("username");
+email		= (String)session.getAttribute("Email");
+phone		= (String)session.getAttribute("Phone");
+address		= (String)session.getAttribute("Address");
+loginTime	= (String)session.getAttribute("LoginTime");
+
+int onlineMember;
+if (application.getAttribute("onlineMember") == null) {
+	onlineMember = 1;
+	application.setAttribute("onlineMember",onlineMember);
+}
+else {
+	try {
+		onlineMember = (Integer) application.getAttribute("onlineMember");
+	}
+	catch (Exception e) {
+		onlineMember = 1;
+		application.setAttribute("onlineMember",onlineMember);
+	}
+}
+%>
+
+<div class="greeting">
+	<div><span style="color: #00FFFF">Welcome, <%=username%></span></div>
+	<div><span style="color: #FF00FF">Online Member: <%=onlineMember%></span></div>
 </div>

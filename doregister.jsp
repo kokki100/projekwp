@@ -1,111 +1,69 @@
-<%@include file="connect-sample.jsp"%>
+<%@ include file = "connect.jsp" %>
 <%
-	String username=request.getParameter("username");
-	String password=request.getParameter("password");
-	String conpass=request.getParameter("conpass");
-	String address=request.getParameter("address");
-	String telephone=request.getParameter("telephone");
-	String email=request.getParameter("email");
-	
-	if (username == null || username.equals("")){
-		response.sendRedirect("register.jsp?err=username must be filled");
-		return;
-	}
-	
-	String query = "SELECT UserID from User where UserName like '"+ username +"'";
-	ResultSet rs = stmt.executeQuery(query);
-	
-	if (rs.next())
-	{
-		response.sendRedirect("register.jsp?err=username has been used");
-		return;
-	}
-	
-	if (password == null || password.equals("")){
-		response.sendRedirect("register.jsp?err=pasword must be filled");
-		return;
-	}
-	
-	if (conpass == null || conpass.equals("")){
-		response.sendRedirect("register.jsp?err=confirm password must be filed");
-		return;
-	}
-	
-	if (!conpass.equals(password)){
-		response.sendRedirect("register.jsp?err=confirm password must equal to password");
-		return;
-	}
-	
-	if (address == null || address.equals("")){
-		response.sendRedirect("register.jsp?err=address must be filed");
-		return;
-	}
-	
-	if (address.length() < 10){
-		response.sendRedirect("register.jsp?err=address minimum 10 characters");
-		return;
-	}
-	
-	int i,j=0;
-	for (i=0;i<address.length()-5;i++)
-		if (address.substring(i,i+6).equals("street"))
-			j=1;
+	String username = (String) request.getParameter("username");
+	String password = (String) request.getParameter("password");
+	String cpassword = (String) request.getParameter("cpassword");
+	String address = (String) request.getParameter("address");
+	String phone = (String) request.getParameter("telephone");
+	String email = (String) request.getParameter("email");
 
-	if (j==0){
-		response.sendRedirect("register.jsp?err=address must contain street");
-		return;
+	if (username.equals("")) {
+		response.sendRedirect("register.jsp?err=nousername"); return;
 	}
-	
-	if (telephone == null || telephone.equals("")){
-		response.sendRedirect("register.jsp?err=telephone must be filed");
-		return;
+	if (password.equals("")) {
+		response.sendRedirect("register.jsp?err=nopassword"); return;
 	}
-	
-	j=-1;
-	try{
-		j=Integer.parseInt(telephone);
-	}catch(Exception e){
-		j=-1;
+	if (cpassword.equals("")) {
+		response.sendRedirect("register.jsp?err=noconfirmpassword"); return;
 	}
-	
-	if (j==-1){
-		response.sendRedirect("register.jsp?err=telehpne must numeric");
-		return;
+	if (!password.equals(cpassword)) {
+		response.sendRedirect("register.jsp?err=confirmpassword"); return;
 	}
-		
-	if (email == null || email.equals("")){
-		response.sendRedirect("register.jsp?err=email must be filed");
-		return;
+	if (address.equals("")) {
+		response.sendRedirect("register.jsp?err=noaddress"); return;
 	}
-	
-	int at=-1,dot=-1;
-	for (i=0;i<email.length();i++)
-		if (email.substring(i,i+1).equals("."))
-			dot=i;
-		else if (email.substring(i,i+1).equals("@"))
-			at=i;
-			
-	if (at==-1){
-		response.sendRedirect("register.jsp?err=email must contain @");
-		return;
+	if (address.length() < 10) {
+		response.sendRedirect("register.jsp?err=shortaddress"); return;
 	}
-	
-	if (dot==-1){
-		response.sendRedirect("register.jsp?err=email must contain dot");
-		return;
+	// validate address format
+	if (!address.contains("street")) {
+		response.sendRedirect("register.jsp?err=wrongaddressformat"); return;
 	}
-	
-	if (dot<at){
-		response.sendRedirect("register.jsp?err=email must contain dot after @");
-		return;
+	if (phone.equals("")) {
+		response.sendRedirect("register.jsp?err=nophone"); return;
 	}
-	
-	if (dot==email.length()-1){
-		response.sendRedirect("register.jsp?err=email must contain domain");
-		return;
+	boolean phoneIsNumber = false;
+	try {
+		long tmp = Long.parseLong(phone);
+		phoneIsNumber = true;
+	} catch(NumberFormatException e) {
+		phoneIsNumber = false;
 	}
-	
-	//String update = "";
-	//stmt.executeUpdate(update);
-		
+	// validate number only for phone
+	if (!phoneIsNumber) {
+		response.sendRedirect("register.jsp?err=wrongphoneformat"); return;
+	}
+	if (phone.length() < 12 || phone.length() > 15) {
+		response.sendRedirect("register.jsp?err=wrongphonelength"); return;
+	}
+	if (email.equals("")) {
+		response.sendRedirect("register.jsp?err=noemail"); return;
+	}
+	// validate email
+	String regexEmail = "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})";
+	if (!email.matches(regexEmail)) {
+		response.sendRedirect("register.jsp?err=wrongemailformat"); return;
+	}
+
+	try {
+		String query = "INSERT INTO User(UserName, Password, IsAdmin, Address, Phone, Email) VALUES ('"+username+"', '"+password+"', 0, '"+address+"', '"+phone+"', '"+email+"')";
+		st.executeUpdate(query);
+	}
+	catch (Exception e){
+		//out.println(e.getMessage());
+		con.close();
+		response.sendRedirect("register.jsp?err=unknownerror"); return;
+	}
+	con.close();
+	response.sendRedirect("register.jsp?mess=success"); return;
 %>

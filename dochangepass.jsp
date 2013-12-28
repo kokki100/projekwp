@@ -1,45 +1,30 @@
-<%@include file="connect-sample.jsp"%>
+<%@ include file = "connect.jsp" %>
 <%
-	String username=(String) session.getAttribute("username");;
-	String oldpass=request.getParameter("oldpass");
-	String newpass=request.getParameter("newpass");
-	String connew=request.getParameter("connew");
-	String password=null;
-	
-	if (oldpass == null || oldpass.equals("")){
-		response.sendRedirect("changepass.jsp?err=old password must be filled");
-		return;
+	String password = (String) request.getParameter("old");
+	String newPassword = (String) request.getParameter("new");
+	String cNewPassword = (String) request.getParameter("connew");
+
+	String userId = (String) session.getAttribute("UserID");
+	if (userId == null) { response.sendRedirect("home.jsp?err=nosession"); return; }
+
+	String query = "SELECT 1 FROM User WHERE UserID = "+userId+" AND Password = '"+password+"'";
+	ResultSet rs = st.executeQuery(query);
+	if (rs.next()) {
+		// true
+		if (newPassword.equals(cNewPassword)) {
+			query = "UPDATE User SET Password = '"+newPassword+"' WHERE UserID = "+userId;
+			st.executeUpdate(query);
+			con.close();
+			response.sendRedirect("changepassword.jsp?mess=success"); return;
+		}
+		else {
+			con.close();
+			response.sendRedirect("changepassword.jsp?err=confirmpassword"); return;
+		}
 	}
-	
-	String query = "SELECT Password from User where UserName like '"+ username +"'";
-	ResultSet rs = stmt.executeQuery(query);
-	
-	if(rs.next()){
-		password = rs.getString("Password");
+	else {
+		// wrong password
+		con.close();
+		response.sendRedirect("changepassword.jsp?err=wrongpassword"); return;
 	}
-	
-	if (!password.equals(oldpass)){
-		response.sendRedirect("changepass.jsp?err=old password must equals to password");
-		return;
-	}
-	
-	if (newpass == null || newpass.equals("")){
-		response.sendRedirect("changepass.jsp?err=new password must be filled");
-		return;
-	}
-	
-	if (connew == null || connew.equals("")){
-		response.sendRedirect("changepass.jsp?err=confirm password must be filled");
-		return;
-	}
-	
-	if (!connew.equals(newpass)){
-		response.sendRedirect("changepass.jsp?err=confirm password must equals to new password");
-		return;
-	}
-	
-	String update = "UPDATE User SET Password = '"+newpass+"' WHERE UserName = '"+username+"'";
-	stmt.executeUpdate(update);
-	
-	response.sendRedirect("changepass.jsp?err=password changed");
 %>

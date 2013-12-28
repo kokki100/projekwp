@@ -12,6 +12,21 @@ table {
 	border-spacing: 0;
 }
 
+table.withborder {
+
+}
+table.withborder tr:first-child td, table.withborder tr:first-child th {
+	border-top: 1px solid #FFFFFF;
+}
+table.withborder tr td:first-child, table.withborder tr th:first-child {
+	border-left: 1px solid #FFFFFF;
+}
+table.withborder td, table.withborder th {
+	border-right: 1px solid #FFFFFF;
+	border-bottom: 1px solid #FFFFFF;
+	padding: 5px;
+}
+
 a {
 	color: #FFFFFF;
 }
@@ -25,7 +40,7 @@ a {
 }
 
 #content {
-	min-height: 300px;
+	min-height: 225px;
 	padding: 20px;
 }
 
@@ -74,4 +89,10 @@ a {
 
 .error {
 	color: #FF0000;
+}
+.message {
+	color: #00FF00;
+}
+.greeting {
+	padding: 20px;
 }
