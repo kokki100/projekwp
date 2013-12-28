@@ -124,7 +124,7 @@ con.close();
 							<a href="removeproduct.jsp?productid=<%=products.get(i)[0]%>">Remove</a> | 
 							<a href="updateproduct.jsp?productid=<%=products.get(i)[0]%>">Update</a>
 						<% } else { %>
-							<a href="managecart.jsp?productid=<%=products.get(i)[0]%>">Add</a>
+							<a<% if (!products.get(i)[4].equals("0")) { %> href="managecart.jsp?productid=<%=products.get(i)[0]%>"<% } %>>Add</a>
 						<% } %>
 						</td>
 						<% } %>
