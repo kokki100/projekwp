@@ -57,3 +57,7 @@
 		</form>
 	</div>
 </div>
+
+<t:templateFoot>
+	<jsp:attribute name="footer"></jsp:attribute>
+</t:templateFoot>

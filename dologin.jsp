@@ -17,9 +17,9 @@
 
 <%@include file="connect-sample.jsp"%>
 <%
-	String query = "SELECT Profile.UserID, Profile.FirstName, Profile.MiddleName, Profile.LastName, Profile.Email, Profile.Phone, Profile.Address, NOW() AS LoginTime FROM User INNER JOIN Profile ON User.UserID = Profile.UserID WHERE User.UserName = '" + username + "' AND User.Password = '" + password + "'";
+	String query = "SELECT Profile.UserID, Profile.FirstName, Profile.MiddleName, Profile.LastName, Profile.Email, Profile.Phone, Profile.Address, User.Privilege, NOW() AS LoginTime FROM User INNER JOIN Profile ON User.UserID = Profile.UserID WHERE User.UserName = '" + username + "' AND User.Password = '" + password + "'";
 	ResultSet rs = stmt.executeQuery(query);
-	String userId, firstName, middleName, lastName, email, phone, address, loginTime;
+	String userId, firstName, middleName, lastName, email, phone, address, loginTime,privilege;
 	if (rs.next()) {
 		userId		= rs.getString("UserID");
 		firstName	= rs.getString("FirstName");
@@ -29,6 +29,7 @@
 		phone 		= rs.getString("Phone");
 		address 	= rs.getString("Address");
 		loginTime	= rs.getString("LoginTime");
+		privilege	= rs.getString("Privilege");
 	}
 	else {
 		response.sendRedirect("home.jsp?err=invalidlogin");return;
@@ -46,7 +47,8 @@
 		Cookie cPhone		= new Cookie("Phone",		phone);
 		Cookie cAddress		= new Cookie("Address",		address);
 		Cookie cLoginTime	= new Cookie("LoginTime",	loginTime);
-
+		Cookie cPrivilege	= new Cookie("Privilege",	privilege);
+		
 		int cookieAge = 60 * 60 * 24;
 		cUserId.setMaxAge(cookieAge);
 		cUsername.setMaxAge(cookieAge);
@@ -57,6 +59,7 @@
 		cPhone.setMaxAge(cookieAge);
 		cAddress.setMaxAge(cookieAge);
 		cLoginTime.setMaxAge(cookieAge);
+		cPrivilege.setMaxAge(cookieAge);
 
 		response.addCookie(cUserId);
 		response.addCookie(cUsername);
@@ -67,7 +70,8 @@
 		response.addCookie(cPhone);
 		response.addCookie(cAddress);
 		response.addCookie(cLoginTime);
-	
+		response.addCookie(cPrivilege);
+		
 		session.setAttribute("isRemember",	true);
 	}
 	else {
@@ -83,6 +87,7 @@
 	session.setAttribute("Phone",		phone);
 	session.setAttribute("Address",		address);
 	session.setAttribute("LoginTime",	loginTime);
+	session.setAttribute("Privilege",	privilege);
 	response.sendRedirect("home.jsp");
 
 	if (application.getAttribute("onlineMember") == null) {
