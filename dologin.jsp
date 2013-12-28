@@ -15,10 +15,10 @@
 	// validation end
 %>
 
-<%@include file="connect.jsp"%>
+<%@include file="connect-sample.jsp"%>
 <%
 	String query = "SELECT Profile.UserID, Profile.FirstName, Profile.MiddleName, Profile.LastName, Profile.Email, Profile.Phone, Profile.Address, NOW() AS LoginTime FROM User INNER JOIN Profile ON User.UserID = Profile.UserID WHERE User.UserName = '" + username + "' AND User.Password = '" + password + "'";
-	ResultSet rs = st.executeQuery(query);
+	ResultSet rs = stmt.executeQuery(query);
 	String userId, firstName, middleName, lastName, email, phone, address, loginTime;
 	if (rs.next()) {
 		userId		= rs.getString("UserID");

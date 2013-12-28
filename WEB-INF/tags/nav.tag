@@ -2,22 +2,22 @@
 <div id="main-nav">
 	<ul>
 		<li>
-			<a href="#">
+			<a href="home.jsp">
 				Home
 			</a>
 		</li>
 		<li>
-			<a href="#">
+			<a href="register.jsp">
 				Register
 			</a>
 		</li>
 		<li>
-			<a href="#">
+			<a href="product.jsp">
 				Product
 			</a>
 		</li>
 		<li>
-			<a href="#">
+			<a href="testimonial.jsp">
 				Testimonial
 			</a>
 		</li>
