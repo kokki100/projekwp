@@ -23,6 +23,15 @@ if (err != null)
 	else if (err.equals("confirmpassword")) {
 		err = "New Password and Confirm New Password must be the same";
 	}
+	else if (err.equals("oldempty")) {
+		err = "Old Password must be filled";
+	}
+	else if (err.equals("newempty")) {
+		err = "New Password must be filled";
+	}
+	else if (err.equals("conempty")) {
+		err = "Confirm New Password must be filled";
+	}
 	else {
 		err = "unknown error";
 	}
