@@ -1,4 +1,4 @@
-<%@ include file = "connect-sample.jsp" %>
+<%@ include file = "connect.jsp" %>
 <%
 	String username = (String) request.getParameter("username");
 	String password = (String) request.getParameter("password");

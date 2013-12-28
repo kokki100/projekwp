@@ -15,7 +15,7 @@
 	// validation end
 %>
 
-<%@include file="connect-sample.jsp"%>
+<%@include file="connect.jsp"%>
 <%
 	String query = "SELECT IsAdmin, Password, UserID, Address, Phone, Email, NOW() AS LoginTime FROM User WHERE UserName = '" + username + "' AND Password = '" + password + "'";
 
