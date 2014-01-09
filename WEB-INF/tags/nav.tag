@@ -1,5 +1,5 @@
 <%@ tag language="java" description="navigation bar for non-logged in users" pageEncoding="UTF-8" %>
-<div id="main-nav">
+<nav id="main-nav" class="dropdown">
 	<ul>
 		<li>
 			<a href="home.jsp">
@@ -22,4 +22,4 @@
 			</a>
 		</li>
 	</ul>
-</div>
+</nav>
