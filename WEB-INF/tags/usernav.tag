@@ -48,8 +48,66 @@ else {
 	// no session exists
 	response.sendRedirect("home.jsp?err=nosession");
 }
+
+boolean isLogin = false, isAdmin = false;
+if (session.getAttribute("UserID") != null) {
+	isLogin = true;
+	if (session.getAttribute("IsAdmin") != null && session.getAttribute("IsAdmin").equals("1")) {
+		isAdmin = true;
+	}
+}
+
+if (isAdmin) {
 %>
-<div id="main-nav">
+<nav id="main-nav" class="dropdown">
+	<ul>
+		<li>
+			<a href="home.jsp">
+				Home
+			</a>
+		</li>
+		<li>
+			<a href="logout.jsp">
+				Logout
+			</a>
+		</li>
+		<li>
+			<a href="changepassword.jsp">
+				Change Password
+			</a>
+			<ul>
+				<li>
+					<a href="#">User List</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="product.jsp">
+				Product
+			</a>
+		</li>
+		<li>
+			<a href="testimonial.jsp">
+				Testimonial
+			</a>
+		</li>
+		<li>
+			<a href="services.jsp">
+				Services
+			</a>
+			<ul>
+				<li>
+					<a href="#">Transaction History</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</nav>
+<%
+else {
+%>
+
+<nav id="main-nav" class="dropdown">
 	<ul>
 		<li>
 			<a href="home.jsp">
@@ -80,9 +138,20 @@ else {
 			<a href="services.jsp">
 				Services
 			</a>
+			<ul>
+				<li>
+					<a href="#">My Cart</a>
+				</li>
+				<li>
+					<a href="#">Transaction History</a>
+				</li>
+			</ul>
 		</li>
 	</ul>
-</div>
+</nav>
+
+<% } %>
+
 
 <%
 String userId = "", username = "", email = "", phone = "", address = "", loginTime = "";
