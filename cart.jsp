@@ -53,7 +53,7 @@ con.close();
 	<div style="text-align: center">
 		<h1 style="color: #FFA300; font-weight: normal">My Cart</h1>
 
-		<form method="post" action="maketransaction.jsp">
+		<form method="post" action="action/maketransaction.jsp">
 			<table style="margin: 0 auto; text-align: left" class="withborder">
 				<thead>
 					<tr>
@@ -92,7 +92,7 @@ for (int i = 0; i < totalItem; i++) {
 					<tr>
 						<td colspan="4" style="text-align: center">
 							<button>Make Transaction/Buy</button>
-							<a href="clearcart.jsp">Clear cart</a>
+							<a href="action/clearcart.jsp">Clear cart</a>
 						</td>
 					</tr>
 <% } %>

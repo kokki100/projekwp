@@ -8,7 +8,7 @@
 	int price2,stock2;
 	
 	if (price == null || price.equals("")){
-		response.sendRedirect("updateproduct.jsp?&productid="+productID+"&err=noprice"); return;}
+		response.sendRedirect("../updateproduct.jsp?&productid="+productID+"&err=noprice"); return;}
 	
 	try{
 		price2 = Integer.parseInt(price);
@@ -16,10 +16,10 @@
 	catch(Exception e)
 	{
 		con.close();
-		response.sendRedirect("updateproduct.jsp?&productid="+productID+"&err=pricealp"); return;}
+		response.sendRedirect("../updateproduct.jsp?&productid="+productID+"&err=pricealp"); return;}
 	
 	if (stock == null || stock.equals("")){
-		response.sendRedirect("updateproduct.jsp?&productid="+productID+"&err=nostock"); return;}
+		response.sendRedirect("../updateproduct.jsp?&productid="+productID+"&err=nostock"); return;}
 		
 	try{
 		stock2 = Integer.parseInt(stock);
@@ -27,7 +27,7 @@
 	catch(Exception e)
 	{
 		con.close();
-		response.sendRedirect("updateproduct.jsp?&productid="+productID+"&err=stockalp"); return;
+		response.sendRedirect("../updateproduct.jsp?&productid="+productID+"&err=stockalp"); return;
 	}
 	
 	try{
@@ -39,10 +39,10 @@
 	catch(Exception e)
 	{
 		con.close();
-		response.sendRedirect("updateproduct.jsp?&productid="+productID+"&err=unknownerror"); return;
+		response.sendRedirect("../updateproduct.jsp?&productid="+productID+"&err=unknownerror"); return;
 	}
 	
 	con.close();
-	response.sendRedirect("updateproduct.jsp?&productid="+productID+"&mess=success"); return;
+	response.sendRedirect("../updateproduct.jsp?&productid="+productID+"&mess=success"); return;
 	
 %>

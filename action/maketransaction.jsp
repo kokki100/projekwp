@@ -2,11 +2,11 @@
 <%
 String userId = (String) session.getAttribute("UserID");
 if (userId == null) {
-	response.sendRedirect("home.jsp?nosession"); return;
+	response.sendRedirect("../home.jsp?nosession"); return;
 }
 if (session.getAttribute("IsAdmin").equals("1")) {
 	// admin has no access to this page
-	response.sendRedirect("home.jsp"); return;
+	response.sendRedirect("../home.jsp"); return;
 }
 %>
 <%@ include file = 'connect.jsp' %>
@@ -64,5 +64,5 @@ else {
 }
 
 con.close();
-response.sendRedirect("transactionhistory.jsp");
+response.sendRedirect("../transactionhistory.jsp");
 %>

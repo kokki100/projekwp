@@ -2,7 +2,7 @@
 <%
 String userId = (String) session.getAttribute("UserID");
 if (userId == null) {
-	response.sendRedirect("home.jsp?nosession"); return;
+	response.sendRedirect("../home.jsp?nosession"); return;
 }
 %>
 <%@ include file = 'connect.jsp' %>
@@ -17,7 +17,7 @@ if (!session.getAttribute("IsAdmin").equals("1")) query += " AND UserID = "+user
 rs = st.executeQuery(query);
 if (!rs.next()) {
 	// no transaction id found
-	response.sendRedirect("transactionhistory.jsp"); return;
+	response.sendRedirect("../transactionhistory.jsp"); return;
 }
 
 query = "SELECT DetailTransactionID, ProductID, Quantity FROM Transaction INNER JOIN DetailTransaction ON Transaction.TransactionID = DetailTransaction.TransactionID WHERE Transaction.TransactionID = "+transactionId;
@@ -66,5 +66,5 @@ query = "DELETE FROM Transaction WHERE TransactionID = " + transactionId;
 st.executeUpdate(query);
 
 con.close();
-response.sendRedirect("transactionhistory.jsp");
+response.sendRedirect("../transactionhistory.jsp");
 %>

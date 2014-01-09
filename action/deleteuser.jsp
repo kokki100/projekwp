@@ -8,9 +8,9 @@
 	}
 	catch (Exception e){
 		con.close();
-		response.sendRedirect("userlist.jsp?&err=unknownerror"); return;
+		response.sendRedirect("../userlist.jsp?&err=unknownerror"); return;
 	}
 	
 	con.close();
-	response.sendRedirect("userlist.jsp?&mess=success"); return;
+	response.sendRedirect("../userlist.jsp?&mess=success"); return;
 %>

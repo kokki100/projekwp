@@ -2,7 +2,7 @@
 <%
 String userId = (String) session.getAttribute("UserID");
 if (userId == null) {
-	response.sendRedirect("home.jsp?err=nosession"); return;
+	response.sendRedirect("../home.jsp?err=nosession"); return;
 }
 %>
 
@@ -52,5 +52,5 @@ for (int i = 0; i < totalItem; i++) {
 }
 
 con.close();
-response.sendRedirect("cart.jsp");
+response.sendRedirect("../cart.jsp");
 %>

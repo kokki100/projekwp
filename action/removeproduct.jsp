@@ -11,10 +11,10 @@
 	catch(Exception e)
 	{
 		con.close();
-		response.sendRedirect("product.jsp");
+		response.sendRedirect("../product.jsp");
 	}
 	
 	con.close();
-	response.sendRedirect("product.jsp");
+	response.sendRedirect("../product.jsp");
 	
 %>

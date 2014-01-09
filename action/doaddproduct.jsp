@@ -1,10 +1,10 @@
 <%@ include file = "connect.jsp" %>
 <%
 	if (session.getAttribute("UserID") == null) {
-		response.sendRedirect("home.jsp?err=nosession"); return;
+		response.sendRedirect("../home.jsp?err=nosession"); return;
 	}
 	if (!session.getAttribute("IsAdmin").equals("1")) {
-		response.sendRedirect("home.jsp"); return;
+		response.sendRedirect("../home.jsp"); return;
 	}
 
 	String lampName = (String) request.getParameter("lampName");
@@ -14,43 +14,43 @@
 	String image = (String) request.getParameter("image");
 
 	if (lampName.equals("")) {
-		response.sendRedirect("addproduct.jsp?err=nolampname"); return;
+		response.sendRedirect("../addproduct.jsp?err=nolampname"); return;
 	}
 	if (lampName.length() > 25) {
-		response.sendRedirect("addproduct.jsp?err=lampnametoolong"); return;
+		response.sendRedirect("../addproduct.jsp?err=lampnametoolong"); return;
 	}
 	if (lampType.equals("") || lampType.equals("-1")) {
-		response.sendRedirect("addproduct.jsp?err=nolamptype"); return;
+		response.sendRedirect("../addproduct.jsp?err=nolamptype"); return;
 	}
 	if (price.equals("")) {
-		response.sendRedirect("addproduct.jsp?err=noprice"); return;
+		response.sendRedirect("../addproduct.jsp?err=noprice"); return;
 	}
 	try {
 		int tmp = Integer.parseInt(price);
 	} catch(NumberFormatException e) {
-		response.sendRedirect("addproduct.jsp?err=pricenotnumber"); return;
+		response.sendRedirect("../addproduct.jsp?err=pricenotnumber"); return;
 	}
 	if (stock.equals("")) {
-		response.sendRedirect("addproduct.jsp?err=nostock"); return;
+		response.sendRedirect("../addproduct.jsp?err=nostock"); return;
 	}
 	try {
 		int tmp = Integer.parseInt(stock);
 	} catch(NumberFormatException e) {
-		response.sendRedirect("addproduct.jsp?err=stocknotnumber"); return;
+		response.sendRedirect("../addproduct.jsp?err=stocknotnumber"); return;
 	}
 	if (image == null || image.equals("")) {
-		response.sendRedirect("addproduct.jsp?err=noimage"); return;
+		response.sendRedirect("../addproduct.jsp?err=noimage"); return;
 	}
 	// validate address format
 	if (!image.contains(".jpg") && !image.contains(".png")) {
-		response.sendRedirect("addproduct.jsp?err=wrongimage"); return;
+		response.sendRedirect("../addproduct.jsp?err=wrongimage"); return;
 	}
 
 	try {
 		String query = "SELECT ProductID FROM Product WHERE ProductName = '"+lampName+"'";
 		ResultSet rs = st.executeQuery(query);
 		if (rs.next()) {
-			response.sendRedirect("addproduct.jsp?err=lampnameexist"); return;
+			response.sendRedirect("../addproduct.jsp?err=lampnameexist"); return;
 		}
 
 		query = "INSERT INTO Product(ProductName, ProductTypeID, Price, Image) VALUES ('"+lampName+"', '"+lampType+"', "+price+", '"+image+"')";
@@ -67,14 +67,14 @@
 		}
 		else {
 			con.close();
-			response.sendRedirect("addproduct.jsp?err=unknownerror"); return;
+			response.sendRedirect("../addproduct.jsp?err=unknownerror"); return;
 		}
 	}
 	catch (Exception e){
 		//out.println(e.getMessage());
 		con.close();
-		response.sendRedirect("addproduct.jsp?err=unknownerror"); return;
+		response.sendRedirect("../addproduct.jsp?err=unknownerror"); return;
 	}
 	con.close();
-	response.sendRedirect("addproduct.jsp?mess=success"); return;
+	response.sendRedirect("../addproduct.jsp?mess=success"); return;
 %>

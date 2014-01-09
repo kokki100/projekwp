@@ -8,8 +8,8 @@
 	catch (Exception e){
 		//out.println(e.getMessage());
 		con.close();
-		response.sendRedirect("register.jsp?err=unknownerror"); return;
+		response.sendRedirect("../register.jsp?err=unknownerror"); return;
 	}
 	con.close();
-	response.sendRedirect("testimonial.jsp?mess=dsuccess"); return;
+	response.sendRedirect("../testimonial.jsp?mess=dsuccess"); return;
 %>

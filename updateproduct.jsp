@@ -49,7 +49,7 @@
 		<h1 style="color: #FFA300; font-weight: normal">Manage Product</h1>
 		<span style="color: #FF00FF">Update Lamp Form</span>
 		
-		<form method='post' action='doupdateproduct.jsp?productID=<%=productID%>'>
+		<form method='post' action='action/doupdateproduct.jsp?productID=<%=productID%>'>
 			<table style="margin: 0 auto; text-align: left">
 				<%
 					String query = "SELECT ProductName, ProductType.ProductType, Price, Image, Stock.Stock FROM (Product INNER JOIN ProductType ON Product.ProductTypeID = ProductType.ProductTypeID) INNER JOIN Stock ON Stock.ProductID = Product.ProductID WHERE Product.ProductID = "+productID+"";

@@ -5,9 +5,9 @@
 	String TestimonyID = request.getParameter("TestimonyID");
 	
 	if (testimony==null || testimony.equals("")){
-		response.sendRedirect("edittestimonial.jsp?TestimonyID="+TestimonyID+"&err=empty"); return;}
+		response.sendRedirect("../edittestimonial.jsp?TestimonyID="+TestimonyID+"&err=empty"); return;}
 	if (testimony.length()<15){
-		response.sendRedirect("edittestimonial.jsp?TestimonyID="+TestimonyID+"&err=toofew"); return;}
+		response.sendRedirect("../edittestimonial.jsp?TestimonyID="+TestimonyID+"&err=toofew"); return;}
 %>
 <%@ include file = "connect.jsp" %>
 <%
@@ -17,9 +17,9 @@
 	}
 	catch (Exception e){
 		con.close();
-		response.sendRedirect("edittestimonial.jsp?TestimonyID="+TestimonyID+"&err=unknownerror"); return;
+		response.sendRedirect("../edittestimonial.jsp?TestimonyID="+TestimonyID+"&err=unknownerror"); return;
 	}
 	
 	con.close();
-	response.sendRedirect("testimonial.jsp?mess=editsuccess"); return;
+	response.sendRedirect("../testimonial.jsp?mess=editsuccess"); return;
 %>

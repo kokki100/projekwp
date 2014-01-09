@@ -86,7 +86,7 @@
 							//admin
 							%>
 							<td>
-							<% out.print("<a href= removetestimonial.jsp?TestimonyID="+TestimonyID+">X</a>"); %>
+							<% out.print("<a href=\"action/removetestimonial.jsp?TestimonyID="+TestimonyID+"\">X</a>"); %>
 							</td>
 							<%
 						}
@@ -97,10 +97,10 @@
 							{
 							%>
 							<td>
-							<% out.print("<a href= edittestimonial.jsp?TestimonyID="+TestimonyID+">EDIT</a>"); %>
+							<% out.print("<a href=\"edittestimonial.jsp?TestimonyID="+TestimonyID+"\">EDIT</a>"); %>
 							</td>
 							<td>
-							<% out.print("<a href= removetestimonial.jsp?TestimonyID="+TestimonyID+">X</a>"); %>
+							<% out.print("<a href=\"action/removetestimonial.jsp?TestimonyID="+TestimonyID+"\">X</a>"); %>
 							</td>
 							<%
 							}
@@ -121,7 +121,7 @@
 				%>
 					<h5 style="color: aqua">Testimonial Editor</h5>
 					
-					<form method="post" action="addtestimonial.jsp">
+					<form method="post" action="action/addtestimonial.jsp">
 						<textarea rows="4" cols="40" name="testimony"></textarea>
 						</br>
 						<% if (err != null && !err.equals("")) { %>

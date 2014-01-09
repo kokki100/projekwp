@@ -59,7 +59,7 @@
 				%>
 					<h5 style="color: aqua">Testimonial Editor</h5>
 					
-					<form method="post" action="doedittesti.jsp?TestimonyID=<%=testimonyId%>"\>
+					<form method="post" action="action/doedittesti.jsp?TestimonyID=<%=testimonyId%>"\>
 						<textarea rows="4" cols="40" name="testimony"><%=testimony%></textarea>
 						</br>
 						<% if (err != null && !err.equals("")) { %>

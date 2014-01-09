@@ -60,8 +60,8 @@ if (isAdmin) { %>
 					<td><%=username%></td>
 					<td><%=transactionDate%></td>
 					<td>
-						<a href="removetransaction.jsp?transactionid=<%=transactionId%>">remove</a> |
-						<a href="approvetransaction.jsp?transactionid=<%=transactionId%>">approve</a> |
+						<a href="action/removetransaction.jsp?transactionid=<%=transactionId%>">remove</a> |
+						<a href="action/approvetransaction.jsp?transactionid=<%=transactionId%>">approve</a> |
 						<a href="detailtransaction.jsp?transactionid=<%=transactionId%>">details</a>
 					</td>
 				</tr>
@@ -163,7 +163,7 @@ if (isAdmin) { %>
 					<td><%=username%></td>
 					<td><%=transactionDate%></td>
 					<td>
-						<a href="removetransaction.jsp?transactionid=<%=transactionId%>">remove</a> |
+						<a href="action/removetransaction.jsp?transactionid=<%=transactionId%>">remove</a> |
 						<a href="detailtransaction.jsp?transactionid=<%=transactionId%>">details</a>
 					</td>
 				</tr>

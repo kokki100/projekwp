@@ -71,7 +71,7 @@ else {
 
 		<span style="color: #FF00FF">Register Form</span>
 
-		<form method='post' action='doregister.jsp'>
+		<form method='post' action='action/doregister.jsp'>
 			<table style="margin: 0 auto; text-align: left">
 				<tr>
 					<td>Username</td>

@@ -5,11 +5,11 @@
 
 	// validation start
 	if (username == null || username.equals("")) {
-		response.sendRedirect("home.jsp?err=nousername");
+		response.sendRedirect("../home.jsp?err=nousername");
 		return;
 	}
 	if (password == null || password.equals("")) {
-		response.sendRedirect("home.jsp?err=nopassword");
+		response.sendRedirect("../home.jsp?err=nopassword");
 		return;
 	}
 	// validation end
@@ -23,7 +23,7 @@
 	String userId, email, phone, address, loginTime, isAdmin;
 	if (rs.next()) {
 		if (!password.equals(rs.getString("Password"))) {
-			response.sendRedirect("home.jsp?err=invalidlogin"); return;
+			response.sendRedirect("../home.jsp?err=invalidlogin"); return;
 		}
 		isAdmin		= rs.getString("IsAdmin");
 		userId		= rs.getString("UserID");
@@ -33,7 +33,7 @@
 		loginTime	= rs.getString("LoginTime");
 	}
 	else {
-		response.sendRedirect("home.jsp?err=invalidlogin"); return;
+		response.sendRedirect("../home.jsp?err=invalidlogin"); return;
 	}
 	con.close();
 	// validation passed
@@ -77,7 +77,6 @@
 	session.setAttribute("Phone",		phone);
 	session.setAttribute("Address",		address);
 	session.setAttribute("LoginTime",	loginTime);
-	response.sendRedirect("home.jsp");
 
 	if (application.getAttribute("onlineMember") == null) {
 		application.setAttribute("onlineMember", 1);
@@ -87,4 +86,5 @@
 		onlineMember++;
 		application.setAttribute("onlineMember",onlineMember);
 	}
+	response.sendRedirect("../home.jsp");
 %>

@@ -84,7 +84,7 @@
 		<% if (err != null && !err.equals("")) { %>
 				<div><span class="error"><%=err%></span></div>
 		<% } else if (mess != null && !mess.equals("")) { %>
-					<div><span class="message"><%=mess%></span></div>
+				<div><span class="message"><%=mess%></span></div>
 		<% } %>
 	</div>
 </div>

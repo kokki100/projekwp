@@ -43,7 +43,7 @@ if (session.getAttribute("UserID") == null)
 
 		<span style="color: #FF00FF">Login Form</span>
 
-		<form method='post' action='dologin.jsp'>
+		<form method='post' action='action/dologin.jsp'>
 			<table style="margin: 0 auto;">
 				<tr>
 					<td>Username</td>
@@ -83,7 +83,7 @@ if (session.getAttribute("UserID") == null)
 		<div><span>Login Time</span></div>
 		<div><span style="color: #00FFFF"><%=loginTime%></span></div>
 
-		<div style="margin-top: 50px;"><a href="logout.jsp">logout</a></div>
+		<div style="margin-top: 50px;"><a href="action/logout.jsp">logout</a></div>
 	</div>
 <% } %>
 

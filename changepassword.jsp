@@ -47,7 +47,7 @@ else if (mess != null) {
 		<h1 style="color: #FFA300; font-weight: normal">Updating Profile</h1>
 
 		<span style="color: #FF00FF">Change Password Form</span>
-		<form method='post' action='dochangepass.jsp'>
+		<form method='post' action='action/dochangepass.jsp'>
 			<table style="margin: 0 auto; text-align: left;">
 				<tr>
 					<td>Old Password</td>
