@@ -8,13 +8,15 @@ nav.dropdown ul ul {
 
 	
 nav.dropdown ul {
+	width: 96%;
+	margin: 0;
 	background: #efefef; 
 	background: linear-gradient(top, #efefef 0%, #bbbbbb 100%);  
 	background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%); 
 	background: -webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%); 
 	box-shadow: 0px 0px 9px rgba(0,0,0,0.15);
 	padding: 0 20px;
-	border-radius: 10px;  
+	/*border-radius: 10px;*/
 	list-style: none;
 	position: relative;
 	display: inline-table;
@@ -38,12 +40,13 @@ nav.dropdown ul li {
 		}
 	
 	nav.dropdown ul li a {
-		display: block; padding: 25px 40px;
+		display: block; padding: 15px 25px 15px 15px;
 		color: #757575; text-decoration: none;
 	}
 
 	
 nav.dropdown ul ul {
+	width: auto;
 	background: #5f6975; border-radius: 0px; padding: 0;
 	position: absolute; top: 100%;
 }
@@ -66,3 +69,6 @@ nav.dropdown ul ul ul {
 	position: absolute; left: 100%; top:0;
 }
 
+nav.dropdown {
+	width: 100%;
+}

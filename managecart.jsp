@@ -130,7 +130,7 @@ else {
 
 		<span style="color: #FF00FF">Cart Form</span>
 
-		<form method='post' action='action/managecart.jsp'>
+		<form method='post' action='managecart.jsp'>
 			<table style="margin: 0 auto; text-align: left">
 				<tr>
 					<td>Lamp Name</td>

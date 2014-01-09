@@ -77,7 +77,7 @@ if (isAdmin) {
 			</a>
 			<ul>
 				<li>
-					<a href="#">User List</a>
+					<a href="userlist.jsp">User List</a>
 				</li>
 			</ul>
 		</li>
@@ -92,19 +92,19 @@ if (isAdmin) {
 			</a>
 		</li>
 		<li>
-			<a href="services.jsp">
+			<a>
 				Services
 			</a>
 			<ul>
 				<li>
-					<a href="#">Transaction History</a>
+					<a href="transactionhistory.jsp">Transaction History</a>
 				</li>
 			</ul>
 		</li>
 	</ul>
 </nav>
 <%
-else {
+} else {
 %>
 
 <nav id="main-nav" class="dropdown">
@@ -135,15 +135,15 @@ else {
 			</a>
 		</li>
 		<li>
-			<a href="services.jsp">
+			<a>
 				Services
 			</a>
 			<ul>
 				<li>
-					<a href="#">My Cart</a>
+					<a href="cart.jsp">My Cart</a>
 				</li>
 				<li>
-					<a href="#">Transaction History</a>
+					<a href="transactionhistory.jsp">Transaction History</a>
 				</li>
 			</ul>
 		</li>
