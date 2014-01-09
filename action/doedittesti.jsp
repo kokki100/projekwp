@@ -12,7 +12,7 @@
 <%@ include file = "connect.jsp" %>
 <%
 	try {
-		String query = "UPDATE Testimony SET Testimony = '"+testimony+"' WHERE TestimonyID = "+TestimonyID+"";
+		String query = "UPDATE Testimony SET Testimony = '"+testimony+"', InsertedDate = NOW() WHERE TestimonyID = "+TestimonyID+"";
 		st.executeUpdate(query);
 	}
 	catch (Exception e){

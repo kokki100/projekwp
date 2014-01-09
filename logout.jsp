@@ -14,5 +14,5 @@
 		}
 	}
 	
-	response.sendRedirect("../home.jsp");
+	response.sendRedirect("home.jsp");
 %>

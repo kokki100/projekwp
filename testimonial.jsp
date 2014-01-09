@@ -54,7 +54,7 @@
 
 		<table style="margin: 0 auto; text-align: left">
 			<%
-				String query = "SELECT User.UserName, Testimony.Testimony, Testimony.TestimonyID FROM Testimony INNER JOIN User ON User.UserID = Testimony.UserID ORDER BY TestimonyID";
+				String query = "SELECT User.UserName, Testimony.Testimony, Testimony.TestimonyID FROM Testimony INNER JOIN User ON User.UserID = Testimony.UserID ORDER BY InsertedDate DESC";
 				ResultSet rs = st.executeQuery(query);
 	
 				String username= (String)session.getAttribute("username");

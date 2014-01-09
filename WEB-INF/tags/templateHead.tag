@@ -13,7 +13,7 @@
 <body>
 	<div id="header">
 		<div style="width: 1024px; height: 300px; background-color: #CCCCCC">
-			<img src="header.png" style="width: 1024px; height: 300px;">
+			<img src="res/images/header.png" style="width: 1024px; height: 300px;">
 		</div>
 <% if (session.getAttribute("UserID") == null) { %>
 		<t:nav></t:nav>

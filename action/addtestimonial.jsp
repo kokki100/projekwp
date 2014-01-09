@@ -11,7 +11,7 @@
 	if (testimony.contains("'")) {
 		response.sendRedirect("../testimonial.jsp?err=invalidcharacter"); return;}
 	try {
-		String query = "INSERT INTO Testimony(UserID,Testimony) VALUES ('"+UserID+"', '"+testimony+"')";
+		String query = "INSERT INTO Testimony(UserID,Testimony, InsertedDate) VALUES ('"+UserID+"', '"+testimony+"', NOW())";
 		st.executeUpdate(query);
 	}
 	catch (Exception e){
